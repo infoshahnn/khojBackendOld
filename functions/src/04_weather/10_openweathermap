@@ -1,0 +1,47 @@
+// import { get } from 'https';
+
+// // Replace with your OpenWeatherMap API key
+// const apiKey = 'd005aa3cc71ff0e374d13e1a2444b85a'; 
+
+// // Example: Get historical weather data for Pune, India on September 20, 2024
+// const city = 'Pune';
+// const countryCode = 'IN';
+// const date = '2024-09-20'; // YYYY-MM-DD format
+
+
+// // Get latitude and longitude for the city (you'll likely need a geocoding API for this)
+// // For this example, let's assume we already have them
+// const latitude = 18.5204; 
+// const longitude = 73.8567;
+
+// // Convert date to Unix timestamp (seconds since January 1st, 1970)
+// const unixTimestamp = Math.floor(new Date(date).getTime() / 1000);
+
+// const apiUrl = `https://api.openweathermap.org/data/2.5/onecall/timemachine?lat=${latitude}&lon=${longitude}&dt=${unixTimestamp}&appid=${apiKey}`;
+
+// // // Construct the final API URL
+// // const finalUrl = apiUrl
+// //     .replace('{lat}', latitude)
+// //     .replace('{lon}', longitude)
+// //     .replace('{unixTimestamp}', unixTimestamp);
+
+// get(finalUrl, (res) => {
+//     let data = '';
+
+//     res.on('data', (chunk) => {
+//         data += chunk;
+//     });
+
+//     res.on('end', () => {
+//         try {
+//             const weatherData = JSON.parse(data);
+
+//             // Access historical weather data (e.g., temperature, humidity, etc.)
+//             console.log(weatherData.hourly); 
+//         } catch (error) {
+//             console.error('Error parsing JSON:', error);
+//         }
+//     });
+// }).on('error', (error) => {
+//     console.error('Error fetching data:', error);
+// });

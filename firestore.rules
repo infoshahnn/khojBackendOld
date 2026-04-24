@@ -1,0 +1,658 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+  	// rahul:
+    match /testRahul/{id} {
+    	allow read, write: if true;//userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    // aditya:
+    match /testAditya/{id} {
+    	allow read, write: if true;//userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    // saquib:
+    match /testSaquib/{id} {
+    	allow read, write: if true;//userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    // subscriptions:
+    match /subscriptionsFrontEnd/{id} {
+    	allow read, write: if true;//userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /subscriptionsBackEnd/{id} {
+    	allow read, write: if true;//userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /subscriptionsCurrentState/{id} {
+    	allow read, write: if true;//userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /random/plans {
+    	allow read, write: if true;//userIsAdmin(request.auth.token.phone_number);
+    }
+  
+  	match /testing/{id} {
+    	// allow write, read, delete: 
+    	// if resource.data.editable == true;
+      
+      allow write, read: if request.auth != null;
+
+      
+      // allow write, read, delete: if request.resource.data.name == 'hello';
+      // 
+      	//if true; 
+      	//if request.auth != null && userIsSuper(request.auth.token.phone_number);
+      
+    } 
+  
+  	// match /{allPaths=**}/comments/{commentId} {
+    //   allow read, create, update: if request.auth != null;
+    //   allow delete: if request.auth != null 
+    // }
+    //premiumGooglePurchases
+    
+    match /premiumGooglePurchases/{id} {
+    	allow create: if true;
+    	allow read, write: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /experimentRatesPageV3/{id} {
+    	allow create, update: if request.auth != null;
+      allow write, read: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /weather/{id} {
+    	allow read, write: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+   	match /payments/{id} {
+    	allow create: if true;
+    	allow read, write: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+   	match /ratesDetectorV5/{id} {
+    	allow read, write: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /ratesDetector/{id} {
+    	allow read, write: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /termsAgreed/{id} {
+    	allow create: if true;
+    	allow read, write: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /numbersNames/{id} {
+    	allow read, write: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /premiumActions/{id} {
+      allow create: if true;
+    	allow read, write: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /wallPosts/{id} {
+    	allow read, update: if request.auth != null;
+    	allow create: if 
+      	request.auth != null
+        // && request.auth.uid == request.resource.data.wallPostCreatorUserId
+        ;
+      allow delete: if 
+      	request.auth != null
+      	// && (request.auth.uid == request.data.wallPostCreatorUserId 
+        // ||	userIsField(request.auth.token.phone_number))
+        ;
+      
+        match /comments/{commentId} {
+        	allow read, create, update: if request.auth != null;
+        	allow delete: if request.auth != null;
+     	 	}
+    }
+    
+    match /ronil/{id} {
+    	allow write, read: if request.auth != null;
+    	// allow create: if request.auth != null;
+    	// allow delete: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /leads/{id} {
+    	allow read, update: if request.auth != null;
+    	allow create: if request.auth != null;
+    	allow delete: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /usersKnowing/{id} {
+    	allow write, read: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /shorts/{id} {
+    	allow read, update: if request.auth != null;
+    	allow create: if request.auth != null;
+    	allow delete: if userIsAdmin(request.auth.token.phone_number);
+      // allow delete: if 
+      // 	request.auth != null;
+    }
+    
+    match /auctions/{id} {
+    	allow read, update: if request.auth != null;
+    	allow create: if 
+      	request.auth != null
+        // && request.auth.uid == request.resource.data.wallPostCreatorUserId
+        ;
+      allow delete: if request.auth != null && userIsAdmin(request.auth.token.phone_number);
+      
+        match /bids/{commentId} {
+        	allow read, create, update: if request.auth != null;
+        	allow delete: if request.auth != null && (
+          	resource.data.auctionCompanyId == 'psY1o2JxNta2ZdKn5XVu' ||
+            resource.data.auctionCompanyId == 'rOm4LPLa1r7OsvXo9svd' ||
+            resource.data.auctionCompanyId == 'vFUshf9BthJlMAjdLZ9w'
+          );
+     	 	}
+    }
+    
+    match /testUsersAutoGenerated/{id} {
+    	allow read: if true;
+    	allow write, delete: if request.auth != null && userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /auctionApprovals/{approvalDocId}/applicantStatus/{applicationStatusDocId} {
+    	allow read, write: if request.auth != null      
+    }
+    
+    match /auctionApprovals/{approvalDocId}/auctionTriggers/{auctionTriggersDocId} {
+    	allow read, write: if request.auth != null      
+    }
+    
+    match /auctionApprovals/{id} {
+    	allow read, write: if request.auth != null;
+    	// allow write: if 
+    	// request.auth.uid == request.resource.data.id 
+    	// ||	userIsField(request.auth.token.phone_number)
+    	// ;
+      
+	    allow delete: if request.auth != null && userIsAdmin(request.auth.token.phone_number);
+
+      
+      // allow delete: if false
+      	// request.auth != null
+      	// && (request.auth.uid == request.data.wallPostCreatorUserId 
+        // ||	userIsField(request.auth.token.phone_number))
+        // ;
+    }
+    
+    match /auctionTriggers/{id} {
+    	allow read, write: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /auctionApplications/{id} {
+    	allow read, update, create: if request.auth != null;
+      allow delete: if request.auth != null && userIsAdmin(request.auth.token.phone_number);
+    }
+    
+  	match /auctionApplications/{id}/mutuals/{idOfMutualsWith} {
+    	allow read, update, create: if request.auth != null;
+      allow delete: if request.auth != null && userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /auctionBrokerApprovals/{id} {
+    	allow read, update, create: if request.auth != null;
+      allow delete: if request.auth != null && userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /auctionApprovals/{id}/brokerResponses/{brId} {
+    	allow read, update, create: if request.auth != null;
+      allow delete: if request.auth != null && userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    
+    match /auctionApprovals/{id}/auctionMutuals/{aucMuId} {
+    	allow read: if request.auth != null;
+      allow delete: if false;
+    }
+    
+    match /companyContactsForAdmins/{id} {
+    	allow write, read: if request.auth != null && userIsSuper(request.auth.token.phone_number);
+    }
+    
+    
+    match /createConnections/{id} {
+    	allow write, read, delete: if request.auth != null && userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /test/{id} {
+    	allow write, read, delete: if request.auth != null && userIsField(request.auth.token.phone_number);
+    }
+   
+  	// users collection
+  	match /testCollectionUsers/{id} {
+    	allow create: if true;
+      
+      allow read: if request.auth != null;
+      
+      // allow read:  if request.auth.uid == id 
+      // 	|| userIsField(request.auth.token.phone_number);   
+      
+      allow update: if request.auth.uid == id 
+      	|| userIsAdmin(request.auth.token.phone_number)
+        || (userIsField(request.auth.token.phone_number)
+              && request
+              		.resource.data.diff(resource.data).affectedKeys()
+                  .hasOnly(['companyIdArray', 'name']));
+                  
+      allow delete: if (request.auth.uid == id);
+    }
+    
+    match /companiesV2/{id} {
+    	allow read: if request.auth != null;
+      allow create: if request.auth != null;
+      allow update: if userIsField(request.auth.token.phone_number);
+      // allow update: if userIsAdmin(request.auth.token.phone_number)
+      // 	|| (userIsField(request.auth.token.phone_number)
+      //     	&& request.auth.token.phone_number in resource.data.fieldPhones)
+      //   || request.auth.token.phone_number in resource.data.adminPhones;
+      allow delete: if 
+      	userIsSuper(request.auth.token.phone_number) || 
+      	request.auth.token.phone_number == '+918799951361' ||
+        request.auth.token.phone_number == '+918799951362';
+    }
+    
+  	match /transporters/{id} {
+      allow read, create, update: if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /allUsers/{id} {
+      allow read, create, update: if userIsAdmin(request.auth.token.phone_number);
+    }  
+    
+    match /newUsersV2/{id} {
+    	allow read: if userIsField(request.auth.token.phone_number);
+      allow write: if true;//userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /brokers/{id} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /allContacts/{id} {
+      allow read, create, update: if userIsField(request.auth.token.phone_number);
+      allow delete: if userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /allContactsV2/{id} {
+      allow read, create, update: if userIsField(request.auth.token.phone_number);
+      allow delete: if userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /allContactsV2Uploader/{id} {
+      allow read, create, update: if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /transporterPosts/{id} {
+      allow read: if request.auth != null;
+      allow write: if userIsField(request.auth.token.phone_number);
+      
+    }
+    
+    match /buySell/{id} {
+      allow read: if request.auth != null;
+      allow write: if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /callHistory/{id} {
+      allow read, write: if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /mutualsEstablishFor/{id} {
+    	allow read, write: if userIsField(request.auth.token.phone_number);
+    }
+    
+    
+    match /government/{id} {
+      allow read: if true;
+      allow create, update: if userIsField(request.auth.token.phone_number);
+      allow delete: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /events/{id} {
+      allow read: if true;
+      allow create, update: if userIsField(request.auth.token.phone_number);
+      allow delete: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /deleteNetwork/{id} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /deleteNetworkUploader/{id} {
+      allow read, write: if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /warehouses/{id} {
+      allow read, update: if true;// if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /deletedUsers/{id} {
+      allow write: if true;
+      allow read: if userIsField(request.auth.token.phone_number);
+    }   
+
+	 	// match /{allPaths=**}/userInfo/{userInfoId} {
+	 	// allow read: if userIsAdmin(request.auth.token.phone_number);
+	 	// allow update: if userIsSuper(request.auth.token.phone_number);
+	 	// } 
+    
+	 	match /testCollectionUsers/{id}/userInfo/{userInfoId} {
+      allow create: if true;
+
+      allow read: if request.auth.uid == id
+      	|| userIsField(request.auth.token.phone_number);   
+
+      allow update: if request.auth.uid == id
+      	|| userIsField(request.auth.token.phone_number)
+        // || request.auth.token.phone_number == '+918799951362'
+        ;
+        
+      allow delete: if false; // userIsSuper(request.auth.token.phone_number);
+	 	}
+    
+    match /{allPaths=**}/userInfo/{userInfoId} {
+    	allow create: if true;
+      allow read: if userIsField(request.auth.token.phone_number);   
+      allow update: if userIsSuper(request.auth.token.phone_number); 
+      allow delete: if false; // userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /testCollectionUsers/{id}/grain/{docId} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    match /testCollectionUsers/{id}/warehouse/{docId} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    match /testCollectionUsers/{id}/bag/{docId} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    match /testCollectionUsers/{id}/machine/{docId} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    match /testCollectionUsers/{id}/farmer/{docId} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    match /testCollectionUsers/{id}/transporter/{docId} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    match /testCollectionUsers/{id}/surveyor/{docId} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    match /testCollectionUsers/{id}/c/{docId} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    match /testCollectionUsers/{id}/c2/{docId} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /newUsers/{id} {
+      allow write: if true;
+      allow read: if userIsField(request.auth.token.phone_number);
+    }    
+    
+    match /{allPaths=**}/network/{nId} {
+    	allow read: if request.auth != null;
+      // allow read: if request.auth.token.phone_number == nId;
+			allow write: if 
+      	userIsSuper(request.auth.token.phone_number) || 
+      	request.auth.token.phone_number == '+918459714096';
+    }
+    
+    match /{allPaths=**}/posts/{postId} {
+    	allow read: if true;
+      allow write: if request.auth != null;
+    }
+    
+    match /postsHistory/{id} {
+    	allow read: if request.auth != null;
+    	allow write: if userIsField(request.auth.token.phone_number);
+		}
+    
+    match /postsHistoryIntraday/{id} {
+    	allow read: if request.auth != null;
+    	allow write: if userIsField(request.auth.token.phone_number);
+		}
+    
+    match /deletedCompanies/{id} {
+    	allow read, write: if userIsSuper(request.auth.token.phone_number) || 
+      	request.auth.token.phone_number == '+918459714096' ||
+        request.auth.token.phone_number == '+918799951361';
+		}
+    
+    match /zLogs/{id} {
+    	allow update, create: if true; //request.auth != null;
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /zFlutterErrors/{id} {
+    	allow write: if true; //request.auth != null;
+      allow read: if userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /counts/{id} {
+    	allow read, update: if request.auth != null;
+    }
+    
+    match /searchHistory/{id} {
+    	allow read, update: if request.auth != null;
+    }
+    
+    match /searchHistoryV2/{id} {
+    	allow write: if request.auth != null;
+      allow read: if userIsField(request.auth.token.phone_number);
+    }
+    
+    
+    match /searchHistoryV3/{id} {
+    	allow write: if request.auth != null;
+      allow read: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /searchHistorySummary/{id} {
+    	allow write: if userIsSuper(request.auth.token.phone_number);
+    	allow read: if userIsField(request.auth.token.phone_number);
+    }
+    
+  	match /searchHistorySummary2/{id} {
+    	allow write: if userIsSuper(request.auth.token.phone_number);
+    	allow read: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /searchHistorySummary2KeywordWise/{id} {
+      allow write: if userIsSuper(request.auth.token.phone_number);
+    	allow read: if userIsAdmin(request.auth.token.phone_number);
+    }
+    
+    match /display/withoutContacts {
+    	allow read: if true;
+      allow write: if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /display/{id} {
+    	allow read: if request.auth != null;
+      allow write: if userIsField(request.auth.token.phone_number);
+    }
+    
+  	match /random/{id} {
+    	allow write: if true; //userIsSuper(request.auth.token.phone_number);
+      allow read: if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /interestedInUpgrading/{id} {
+    	allow write: if true; //userIsSuper(request.auth.token.phone_number);
+      allow read: if userIsField(request.auth.token.phone_number);
+    }
+    
+    //randomMutualsForInterestedIn
+    match /randomMutualsForInterestedIn/{id} {
+    	allow write: if request.auth != null;
+      allow read: if userIsField(request.auth.token.phone_number);
+    }
+
+    match /testCollectionCompanies/{id} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /ad/{id} {
+    	allow read: if request.auth != null;
+      allow update: if false; //userIsSuper(request.auth.token.phone_number);
+    }
+    
+    match /pincodes/{id} {
+      allow write: if userIsSuper(request.auth.token.phone_number);
+      allow read: if true;// request.auth != null;
+    }
+    
+    match /companyNames/{id} {
+      allow write: if userIsSuper(request.auth.token.phone_number);
+      allow read: if request.auth != null;
+    }
+    
+    match /transporterNames/{id} {
+      allow write: if userIsSuper(request.auth.token.phone_number);
+      allow read: if request.auth != null;
+    }
+    
+    match /notifications/{id} {
+      allow write: if userIsAdmin(request.auth.token.phone_number);
+      allow create: if userIsAdmin(request.auth.token.phone_number);
+      // allow read: if userIsNotification(request.auth.token.phone_number);
+      allow read: if request.auth != null;
+
+    }
+    
+    match /mutuals/{id} {
+      allow write, read: if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /mutualsUploader/{id} {
+      allow write, read: if userIsField(request.auth.token.phone_number);
+    }
+    
+    match /backupCompaniesV2_14nov2021_0905pm/{id} {
+      allow read, write: if userIsSuper(request.auth.token.phone_number);
+    }
+    
+    // // functions
+    // function userIsSuperJio(phoneNumber) {
+    // 	return phoneNumber == '+918668521485';
+    // }
+    
+    function userIsSuper(phoneNumber) {
+    	return phoneNumber == '+918668521485' 
+      	|| phoneNumber == '+919970179564'
+      	|| phoneNumber == '+917126685911';
+    }
+    
+    function userIsAdmin(phoneNumber) {
+    	return userIsSuper(phoneNumber)
+      	|| phoneNumber == '+918080528863' // Shubham company
+      	|| phoneNumber == '+918459714096' // Ramzan company
+        || phoneNumber == '+918459714097' // Darshik Sir company
+        // || phoneNumber == '+918080528906' // Shital Ankar company
+        || phoneNumber == '+918080528901' // Divya company
+        || phoneNumber == '+918080528904' // Sweta Bodh company
+        || phoneNumber == '+918989508325' // S
+        || phoneNumber == '+918799951360' // Madhu company
+        || phoneNumber == '+918799951359' // Pooja company
+        || phoneNumber == '+918799951361' // Sheetal company
+        || phoneNumber == '+918459714092'// Mehendi office
+        || phoneNumber == '+918799951365' // Madhu company
+        || phoneNumber == '+918799951364' // Namrata company
+        || phoneNumber == '+918799951358' // Yash Suryavanshi company
+        || phoneNumber == '+918459714085' // Ashish Bist company
+        || phoneNumber == '+918799951362'
+        || phoneNumber == '+917126685911'
+        
+        // Mar 17, 2022
+      ;
+    }
+    
+    function userIsField(phoneNumber) {
+    	return userIsAdmin(phoneNumber)                
+        // || phoneNumber == '+919579527419' // Surendra personal, Nagpur
+        || phoneNumber == '+918080528883' // Praveen company
+        // || phoneNumber == '+917410044869' // Ashish personal, Nagpur
+        || phoneNumber == '+918459714087' // Jaya company
+        || phoneNumber == '+918799967349' // Shilpa company
+        // || phoneNumber == '+918799951358' // Ram company
+        || phoneNumber == '+918799951362' // Pranali company
+        || phoneNumber == '+918799951363' // Pranali 2 company
+        || phoneNumber == '+918799951361' // Unknown company
+        // || phoneNumber == '+918080528905' // Amruta 2 company (delightchat)
+        || phoneNumber == '+919028167111' // Sayali company
+				|| phoneNumber == '+917887478874' // Megha company
+        // || phoneNumber == '+919778151997' // Hiba personal
+        || phoneNumber == '+917841877781' // ashish nagrale office
+        || phoneNumber == '+917767005472' // Daniel Sir company
+        || phoneNumber == '+918080528893' // Shruti company sim
+        || phoneNumber == '+918799951367' // Priyanka Adulkar PERSONAL
+        || phoneNumber == '+918698999634' // Anjali company
+        || phoneNumber == '+918799967346' // Amruta company
+        || phoneNumber == '+919699893064' // Durga Zade - company
+        || phoneNumber == '+919699893062' // Riya Pathrabe - company
+        || phoneNumber == '+919699893063' // Aachal Dange - company
+       	|| phoneNumber == '+919699893065' // Girjashankar Bisen - company
+        || phoneNumber == '+919699893061' // Office Samsung phone - company
+        || phoneNumber == '+918889582061' // Girjashankar Personal
+        || phoneNumber == '+919607183943' // Mrunali Personal
+        || phoneNumber == '+917507209263' // Charulata Personal
+        || phoneNumber == '+917666035384' // Mithlesh Personal
+        || phoneNumber == '+917038217048' // Rakesh Personal
+				|| phoneNumber == '+917981098990' // Sambaraju Personal
+        
+        // Apr 01, 2022
+        ;
+    }
+    
+    // function userIsNotification(phoneNumber) {
+    // 	return userIsSuper(phoneNumber) ||
+    //   	(userIsField(phoneNumber)
+    // && (phoneNumber == '+918459714092' // shivani
+    // 					|| phoneNumber == '+918080528893' // humera Khoj office
+    // 					|| phoneNumber == '+918799951358' // jagruti
+    // 					|| phoneNumber == '+918080528863' // Supriya
+    //           || phoneNumber == '+918457614087' // Diksha company
+    //           || phoneNumber == '+918459714087' // Jaya company
+    //           || phoneNumber == '+919699893063' // Chaya company
+    //     		)
+    //       )
+    //     ;
+    // }
+    
+    // match /{document=**} {
+    //   allow read: if true;
+    // }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
