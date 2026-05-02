@@ -51,6 +51,8 @@ credentials.json
 service-key.json
 oauth2-key.json
 
+api_key.json
+
 *.json
 service-account.json
 
