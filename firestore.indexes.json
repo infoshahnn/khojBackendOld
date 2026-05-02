@@ -1,0 +1,1248 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "auctions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "bidderUserIds",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "endMilOriginal",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "auctions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "hostUserIds",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "endMilOriginal",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "auctions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "interestedUserIds",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "endMilOriginal",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "broker",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "broker",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "trader",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "fieldPhones",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "nameArray",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "processor",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "sponsoredCategory",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "sponsoredCategoryArray",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "sponsoredCategoryArray",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "sponsoredDiamond",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "trader",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "companyPoints",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "leads",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "premiumUserNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "releasedAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "mutuals",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "endingDigit",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "docCreatedAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "broker",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "city",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "processor",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "directLinks",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "nameArray",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "broker",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "nameArray",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "nameArray",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "processor",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "networkKeys",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "processor",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "sponsoredCategory",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "selfUpdatesPending",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "network",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "sponsoredCategoryArray",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "ownNumber",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "notifications",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userNumbers",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "createdAtForIndexing",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "posts",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "postKeywords",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "postCreatedAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "posts",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        {
+          "fieldPath": "rateOnly",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "postCreatedAt",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "testCollectionUsers",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "employed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "transporterPosts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "postKeywords",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "createdAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "wallPosts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "postKeywords",
+          "arrayConfig": "CONTAINS"
+        },
+        {
+          "fieldPath": "postCreatedAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    },
+    {
+      "collectionGroup": "wallPosts",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "wallPostCreatorUserId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "postCreatedAt",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "allContactsV2",
+      "fieldPath": "notIndexed",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "allUsers",
+      "fieldPath": "notIndexed",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "companiesV2",
+      "fieldPath": "productsV2",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "address",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "adminPhones",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "adminRemarks",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "countOfEmployeesWithoutField",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "createdAt",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "fieldPhones",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "keywords",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "name",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "nameArray",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "networkLinks",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "ownNumber",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "personName",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "phoneOne",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "pinCode",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "selfUpdatesPending",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "shortDescription",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "network",
+      "fieldPath": "whatsapp",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "numbersNames",
+      "fieldPath": "numbersNames",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "posts",
+      "fieldPath": "category",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "posts",
+      "fieldPath": "name",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "posts",
+      "fieldPath": "postCreatedAt",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "posts",
+      "fieldPath": "postCreator",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "posts",
+      "fieldPath": "postKeywords",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "posts",
+      "fieldPath": "postText",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "postsHistory",
+      "fieldPath": "chartData",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "ratesDetector",
+      "fieldPath": "ratesDetector",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "searchHistorySummary2",
+      "fieldPath": "keywordsMap",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "searchHistoryV2",
+      "fieldPath": "adminStatus",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "searchHistoryV2",
+      "fieldPath": "city",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "searchHistoryV2",
+      "fieldPath": "keyword",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "searchHistoryV2",
+      "fieldPath": "ownNumber",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "searchHistoryV2",
+      "fieldPath": "projectVersion",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "searchHistoryV2",
+      "fieldPath": "source",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "searchHistoryV2",
+      "fieldPath": "userId",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "testCollectionUsers",
+      "fieldPath": "companiesMap",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "testCollectionUsers",
+      "fieldPath": "contactsArrayOld",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "userInfo",
+      "fieldPath": "auctionsPremium",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userInfo",
+      "fieldPath": "callCompanyPremium",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userInfo",
+      "fieldPath": "chartsPremium",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userInfo",
+      "fieldPath": "connections",
+      "ttl": false,
+      "indexes": []
+    },
+    {
+      "collectionGroup": "userInfo",
+      "fieldPath": "contactsArrayFresh",
+      "ttl": false,
+      "indexes": [
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION"
+        },
+        {
+          "arrayConfig": "CONTAINS",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userInfo",
+      "fieldPath": "createdAt",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userInfo",
+      "fieldPath": "internationalPremium",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userInfo",
+      "fieldPath": "newsPremium",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "userInfo",
+      "fieldPath": "ownNumber",
+      "ttl": false,
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        },
+        {
+          "order": "DESCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    }
+  ]
+}
