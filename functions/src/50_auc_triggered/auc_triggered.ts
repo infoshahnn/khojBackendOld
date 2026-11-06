@@ -25,14 +25,24 @@ export const emailForApprovedBids = async (before: functions.firestore.DocumentS
     if (after == undefined || after == null) return;
     if (!after.exists) return;
     const auctionData = after.data()
-    if (auctionData == undefined || auctionData == null) return;
-    if (auctionData.fixedPrice != true) return;
+    if (auctionData == undefined || auctionData == null) {
+        console.log(`auction data undefined or null`);
+        return;
+    };
+    if (auctionData.fixedPrice != true) {
+        console.log(`auction is not fixed price`);
+        return;
+    };
 
 
     console.log(`emailForApprovedBids 01`)
 
     const bidsAfter = auctionData.bidsInAuctionDoc
-    if (bidsAfter == undefined || bidsAfter == null) return;
+    console.log(`bidsAfter: ${bidsAfter}`);
+    if (bidsAfter == undefined || bidsAfter == null) {
+        console.log(`bidsAfter undefined or null`);
+        return;
+    };
 
     const companyId = auctionData.companyId
     if (companyId == null || companyId == undefined) return
@@ -44,7 +54,7 @@ export const emailForApprovedBids = async (before: functions.firestore.DocumentS
     for (j; j < bidsAfter.length; j++) {
         const bObject: Map<string, any> = new Map(Object.entries(bidsAfter[j]))
         const replyStatus = bObject.get('replyStatus')
-        if (replyStatus == 'approved') approvedInAfter.push(j)
+        if (replyStatus == 'approved' || replyStatus == 'approvedPartial') approvedInAfter.push(j)
     }
 
     if (before != null && before != undefined) {
@@ -56,7 +66,7 @@ export const emailForApprovedBids = async (before: functions.firestore.DocumentS
                 for (i; i < bidsBefore.length; i++) {
                     const bObject: Map<string, any> = new Map(Object.entries(bidsBefore[i]))
                     const replyStatus = bObject.get('replyStatus')
-                    if (replyStatus == 'approved') approvedInBefore.push(i)
+                    if (replyStatus == 'approved' || replyStatus == 'approvedPartial') approvedInBefore.push(i)
                 }
             }
         }
@@ -82,6 +92,7 @@ export const emailForApprovedBids = async (before: functions.firestore.DocumentS
     const bidderUserId = bidMapObject.get('bidderUserId')
     const bidPricePerMt: number = bidMapObject.get('bidPricePerMt')
     const bidQuantityPerMt: number = bidMapObject.get('bidQuantityMt')
+    const approvedPartialQuantityMt: number = bidMapObject.get('approvedPartialQuantityMt')
     const bidderRemarks: string = bidMapObject.get('bidderRemarks')
 
     if (bidderUserId == null || bidderUserId == undefined || bidderUserId == '' ||
@@ -203,7 +214,7 @@ export const emailForApprovedBids = async (before: functions.firestore.DocumentS
             hostHtml += brokerOrBidderDetails('Broker/bidder', bidderName, bidderNumber, bidderCompany, bidderCompanyRegion)
         hostHtml += '<br><br>'
 
-        hostHtml += priceQuantityDetailsForFixed(currency, quantityUnitEnglish, bidPricePerMt, bidQuantityPerMt)
+        hostHtml += priceQuantityDetailsForFixed(currency, quantityUnitEnglish, bidPricePerMt, bidQuantityPerMt, approvedPartialQuantityMt)
         hostHtml += '<br><br>'
 
         if (bidderRemarks != undefined && bidderRemarks != null && bidderRemarks != '')
@@ -218,7 +229,7 @@ export const emailForApprovedBids = async (before: functions.firestore.DocumentS
         let hostSubject = `Trade confirmed | `
         hostSubject += `${keywordDisplayEnglish == null || keywordDisplayEnglish == undefined || keywordDisplayEnglish == '' ? itemEnglish : keywordDisplayEnglish} | `
         console.log(`email subject so far: ${hostSubject}`)
-        hostSubject += priceQuantityDetailsForFixed(currency, quantityUnitEnglish, bidPricePerMt, bidQuantityPerMt)
+        hostSubject += priceQuantityDetailsForFixed(currency, quantityUnitEnglish, bidPricePerMt, bidQuantityPerMt, approvedPartialQuantityMt)
         hostSubject += ' | '
         console.log(`email subject so far: ${hostSubject}`)
         if (thruBroker)
@@ -260,7 +271,7 @@ export const emailForApprovedBids = async (before: functions.firestore.DocumentS
             bidderHtml += '<br><br>'
         }
 
-        bidderHtml += priceQuantityDetailsForFixed(currency, quantityUnitEnglish, bidPricePerMt, bidQuantityPerMt)
+        bidderHtml += priceQuantityDetailsForFixed(currency, quantityUnitEnglish, bidPricePerMt, bidQuantityPerMt, approvedPartialQuantityMt)
         bidderHtml += '<br><br>'
 
         if (bidderRemarks != undefined && bidderRemarks != null && bidderRemarks != '')
@@ -273,7 +284,7 @@ export const emailForApprovedBids = async (before: functions.firestore.DocumentS
         bidderSubject = `Trade confirmed | `
         bidderSubject += `${keywordDisplayEnglish == null || keywordDisplayEnglish == undefined || keywordDisplayEnglish == '' ? itemEnglish : keywordDisplayEnglish} | `
         console.log(`email subject so far: ${bidderSubject}`)
-        bidderSubject += priceQuantityDetailsForFixed(currency, quantityUnitEnglish, bidPricePerMt, bidQuantityPerMt)
+        bidderSubject += priceQuantityDetailsForFixed(currency, quantityUnitEnglish, bidPricePerMt, bidQuantityPerMt, approvedPartialQuantityMt)
         bidderSubject += ` | ${hostCompanyName} | ${brokerCompany == '' ? brokerName : brokerCompany}`
         bidderSubject = bidderSubject.replace('\n', '<br>')
 

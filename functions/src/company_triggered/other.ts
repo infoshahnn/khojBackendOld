@@ -380,11 +380,28 @@ export const c_notify_friends_export = functions.region('asia-south1').runWith({
         let userNumbers = []
         // let countWithToken: number = 0
         let countWithoutToken: number = 0
+        let shouldSkipNotification = true;
+
+        const skipJoinedNotificationDoc = await db.collection('random').doc('skipJoinedKhojNotificationForUsersWhoKnowTheseNumbers').get();
+
+        const skipJoinedNotification = skipJoinedNotificationDoc.data()?.skipJoinedNotification || []; 
 
         for (const u of usersQ.docs) {
             const userData = u.data()
             const deviceInfo = userData.deviceInfo
             const ownNumber = userData.ownNumber
+
+            // Skip notification for on new user joined
+            const userContacts: string[] = userData.contactsArrayFresh ?? [];
+
+            // Convert contacts array to Set (O(n))
+            const contactSet = new Set(userContacts);
+
+            // Check whether any skip number exists in contacts
+            shouldSkipNotification = skipJoinedNotification.some((number: any) =>
+                contactSet.has(number)
+            );
+            console.log(`User ${u.id}: shouldSkipNotification = ${shouldSkipNotification}`);
 
             if (deviceInfo == null || deviceInfo == undefined || deviceInfo == '' || ownNumber == null || ownNumber == undefined || ownNumber == '') {
                 countWithoutToken++
@@ -393,13 +410,15 @@ export const c_notify_friends_export = functions.region('asia-south1').runWith({
             ) {
                 countWithoutToken++
             } else {
-                userNumbers.push(ownNumber)
-                const t = deviceInfo.token
-                if (t != null && t != undefined && t != '') {
-                    tokens.push(t)
-                    // countWithToken++
-                } else {
-                    countWithoutToken++
+                if(!shouldSkipNotification) {
+                    userNumbers.push(ownNumber)
+                    const t = deviceInfo.token
+                    if (t != null && t != undefined && t != '') {
+                        tokens.push(t)
+                        // countWithToken++
+                    } else {
+                        countWithoutToken++
+                    }
                 }
             }
         }
