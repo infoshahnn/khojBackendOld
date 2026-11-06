@@ -11,7 +11,10 @@ export const bid_triggered_export = onDocumentUpdated(`auctions/{auctionId}/bids
         if (event == undefined || event.data == undefined ||
             event.data.after.data() == undefined || event.data.after.data() == null ||
             event.data.before.data() == undefined || event.data.before.data() == null
-        ) return
+        ) {
+            console.log(`bid triggered null or undefined data`);
+            return;
+        }
 
         const beforeData: FirebaseFirestore.DocumentData = event.data.before.data()!
         const afterData: FirebaseFirestore.DocumentData = event.data.after.data()!
@@ -19,15 +22,27 @@ export const bid_triggered_export = onDocumentUpdated(`auctions/{auctionId}/bids
         const replyBefore = beforeData.replyStatus
         const replyAfter = afterData.replyStatus
 
-        if (replyAfter != 'approved') return
-        if (replyBefore != '' && replyBefore != 'pending') return
+        if (replyAfter != 'approved' && replyAfter != 'approvedPartial') {
+            console.log(`replyAfter is not approved or approvedPartial`);
+            return;
+        }
+        if (replyBefore != '' && replyBefore != 'pending') {
+            console.log(`replyBefore is not empty or pending`);
+            return;
+        }
 
         const auctionDoc = await event.data.after.ref.parent.parent?.get()
-        if (auctionDoc == null || auctionDoc == undefined) return
+        if (auctionDoc == null || auctionDoc == undefined) {
+            console.log(`auctionDoc is null or undefined`);
+            return;
+        }
         const auctionData = auctionDoc.data()
         if (auctionData == null || auctionData == undefined) return
         const cid = auctionData.companyId
-        if (cid == null || cid == '' || cid == undefined) return
+        if (cid == null || cid == '' || cid == undefined) {
+            console.log(`companyId is null or empty or undefined`);
+            return;
+        }
         const db: FirebaseFirestore.Firestore = admin.firestore()
 
         const currency = auctionData.currency
@@ -42,7 +57,9 @@ export const bid_triggered_export = onDocumentUpdated(`auctions/{auctionId}/bids
             return
         }
 
-        if (afterData.bidderUserId == null || afterData.bidderUserId == '' || afterData.bidderUserId == undefined) return
+        if (afterData.bidderUserId == null || afterData.bidderUserId == '' || afterData.bidderUserId == undefined) {
+            console.log(`bidderUserId is null or empty or undefined`);
+        }
 
         try {
             // VARIABLES
@@ -301,13 +318,16 @@ export const priceQuantityDetailsForReverse = (bidDocumentData: FirebaseFirestor
         return ''
     }
 
-    str += `${bidDocumentData.bidQuantityMt} ${quantityUnit} @ ${currency} ${bidDocumentData.bidPricePerMt}/${quantityUnit}`
+    const bidQuantity = bidDocumentData.approvedPartialQuantityMt ?? bidDocumentData.bidQuantityMt;
+
+    str += `Original Quantity: ${bidDocumentData.bidQuantityMt} ${quantityUnit} @ ${currency} ${bidDocumentData.bidPricePerMt}/${quantityUnit}\n`
+    str += `Approved Quantity: ${bidQuantity} ${quantityUnit} @ ${currency} ${bidDocumentData.bidPricePerMt}/${quantityUnit}`
 
     return str
 }
 
 
-export const priceQuantityDetailsForFixed = (currency: string, quantityUnit: string, bidPricePerMt: number, bidQuantityMt: number, ): string => {
+export const priceQuantityDetailsForFixed = (currency: string, quantityUnit: string, bidPricePerMt: number, bidQuantityMt: number, approvedPartialQuantityMt: number | null): string => {
     let str: string = ''
     if (
         bidPricePerMt == null || bidPricePerMt == undefined ||
@@ -317,7 +337,9 @@ export const priceQuantityDetailsForFixed = (currency: string, quantityUnit: str
         return ''
     }
 
-    str += `${bidQuantityMt} ${quantityUnit} @ ${currency} ${bidPricePerMt}/${quantityUnit}`
+    const bidQuantity = approvedPartialQuantityMt ?? bidQuantityMt;
+
+    str += `${bidQuantity} ${quantityUnit} @ ${currency} ${bidPricePerMt}/${quantityUnit}`
 
     return str
 }

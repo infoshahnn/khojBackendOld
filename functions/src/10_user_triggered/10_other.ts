@@ -26,7 +26,12 @@ export const users_notify_friends_export = functions.region('asia-south1').runWi
 
         const userDocs = await userCollec.where('contactsArrayFresh', 'array-contains', ownNumber).get()
         readsCounter += userDocs.docs.length
-        console.log(`ownNumber ${ownNumber}: Found ${userDocs.docs.length} docs`)
+        console.log(`ownNumber ${ownNumber}: Found ${userDocs.docs.length} docs`);
+
+        //read documents for notification skip joined new user
+        const skipJoinedNotificationDoc = await db.collection('random').doc('skipJoinedKhojNotificationForUsersWhoKnowTheseNumbers').get();
+
+        const skipJoinedNotification = skipJoinedNotificationDoc.data()?.skipJoinedNotification || []; 
 
         for (const userDoc of userDocs.docs) {
             const userDocData = userDoc.data()
@@ -69,41 +74,55 @@ export const users_notify_friends_export = functions.region('asia-south1').runWi
                     }
                 } catch (e) { }
 
-                if (userName == null || userName == undefined || userName == '') {
-                    console.log(`ownNumber ${ownNumber}: Will try for userName NA, friendNumber: ${friendNumber}`)
+                const userContacts: string[] = userDocData.contactsArrayFresh ?? [];
 
-                    try {
-                        await db.collection('notifications').add({
-                            'tokens': [],
-                            'title': `*${ownNumber}* joined Khoj`,
-                            'body': `*${ownNumber}* खोज में शामिल हुए हैं`,
-                            'status': 'pending',
-                            'createdAt': Date.now(),
-                            'createdAtForIndexing': Date.now(),
-                            'source': 'userCreatedWithoutName',
-                            'userNumbers': [friendNumber],
-                            'destinationNumber': ownNumber,
+                // Convert contacts array to Set (O(n))
+                const contactSet = new Set(userContacts);
 
-                        })
-                        writesCounter++
-                    } catch (e) { if (e instanceof Error) await logError(`users_notify_friends///14///${e.toString()}`); }
-                } else {
-                    console.log(`ownNumber ${ownNumber}: Will try for userName: ${userName}, friendNumber: ${friendNumber}`)
+                // Check whether any skip number exists in contacts
+                const shouldSkipNotification = skipJoinedNotification.some((number: any) =>
+                    contactSet.has(number)
+                );
 
-                    try {
-                        await db.collection('notifications').add({
-                            'tokens': [token],
-                            'title': `*${userName}* (${ownNumber}) joined Khoj`,
-                            'body': `*${userName}* (${ownNumber}) खोज में शामिल हुए हैं`,
-                            'status': 'pending',
-                            'createdAt': Date.now(),
-                            'createdAtForIndexing': Date.now(),
-                            'source': 'userCreatedWithName',
-                            'userNumbers': [friendNumber],
-                            'destinationNumber': ownNumber,
-                        })
-                        writesCounter++
-                    } catch (e) { if (e instanceof Error) await logError(`users_notify_friends///15///${e.toString()}`) }
+                console.log(`User ${userDoc.id}: shouldSkipNotification = ${shouldSkipNotification}`);
+
+                if (!shouldSkipNotification) {
+                    if (userName == null || userName == undefined || userName == '') {
+                        console.log(`ownNumber ${ownNumber}: Will try for userName NA, friendNumber: ${friendNumber}`)
+
+                        try {
+                            await db.collection('notifications').add({
+                                'tokens': [],
+                                'title': `*${ownNumber}* joined Khoj`,
+                                'body': `*${ownNumber}* खोज में शामिल हुए हैं`,
+                                'status': 'pending',
+                                'createdAt': Date.now(),
+                                'createdAtForIndexing': Date.now(),
+                                'source': 'userCreatedWithoutName',
+                                'userNumbers': [friendNumber],
+                                'destinationNumber': ownNumber,
+
+                            })
+                            writesCounter++
+                        } catch (e) { if (e instanceof Error) await logError(`users_notify_friends///14///${e.toString()}`); }
+                    } else {
+                        console.log(`ownNumber ${ownNumber}: Will try for userName: ${userName}, friendNumber: ${friendNumber}`)
+
+                        try {
+                            await db.collection('notifications').add({
+                                'tokens': [token],
+                                'title': `*${userName}* (${ownNumber}) joined Khoj`,
+                                'body': `*${userName}* (${ownNumber}) खोज में शामिल हुए हैं`,
+                                'status': 'pending',
+                                'createdAt': Date.now(),
+                                'createdAtForIndexing': Date.now(),
+                                'source': 'userCreatedWithName',
+                                'userNumbers': [friendNumber],
+                                'destinationNumber': ownNumber,
+                            })
+                            writesCounter++
+                        } catch (e) { if (e instanceof Error) await logError(`users_notify_friends///15///${e.toString()}`) }
+                    }
                 }
             }
         }

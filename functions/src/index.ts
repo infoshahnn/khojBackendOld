@@ -1278,300 +1278,6 @@ export const getPostKeywords = (message: string = "", buySell: boolean = false, 
         // new method
         const isRelevant: boolean = messageIsRelevantForKeyword(message, checkWord)
         if (isRelevant) keywordsList.push(uniqueWord)
-
-        // old method
-        // if (checkWord == "til") {
-        //   const keyCount: number = (message.match(/til/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/till/g) || []).length
-        //   wrongCount += (message.match(/ntil/g) || []).length // until
-        //   wrongCount += (message.match(/entil/g) || []).length // lentil / Lentil
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "tomato") {
-        //   const keyCount: number = (message.match(/tomato/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/tomato chili/g) || []).length
-        //   wrongCount += (message.match(/tomato chilli/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "gud") {
-        //   const keyCount: number = (message.match(/gud/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/gudi/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "sugar") {
-        //   const keyCount: number = (message.match(/sugar/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/potato sugar/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "cumin") {
-        //   const keyCount: number = (message.match(/cumin/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/rice/g) || []).length
-        //   wrongCount += (message.match(/urcumin/g) || []).length
-        //   wrongCount += (message.match(/india gate jeera/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "bajra") {
-        //   const keyCount: number = (message.match(/bajra/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/ajrang/g) || []).length
-        //   wrongCount += (message.match(/AJRANG/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "til") {
-        //   const keyCount: number = (message.match(/til/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/till/g) || []).length
-        //   wrongCount += (message.match(/Till/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "orange") {
-
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/kabuli/g) || []).length
-        //   wrongCount += (message.match(/bold/g) || []).length
-        //   wrongCount += (message.match(/rajma/g) || []).length
-        //   wrongCount += (message.match(/rice/g) || []).length
-        //   wrongCount += (message.match(/chana/g) || []).length
-        //   wrongCount += (message.match(/masoor/g) || []).length
-        //   wrongCount += (message.match(/daal/g) || []).length
-        //   wrongCount += (message.match(/urad/g) || []).length
-        //   wrongCount += (message.match(/mung/g) || []).length
-
-        //   if (wrongCount == 0) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "apple") {
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/rice/g) || []).length
-        //   wrongCount += (message.match(/bajra/g) || []).length
-        //   wrongCount += (message.match(/kabuli/g) || []).length
-        //   wrongCount += (message.match(/bold/g) || []).length
-        //   wrongCount += (message.match(/rajma/g) || []).length
-        //   wrongCount += (message.match(/rice/g) || []).length
-        //   wrongCount += (message.match(/chana/g) || []).length
-        //   wrongCount += (message.match(/masoor/g) || []).length
-        //   wrongCount += (message.match(/daal/g) || []).length
-        //   wrongCount += (message.match(/urad/g) || []).length
-        //   wrongCount += (message.match(/mung/g) || []).length
-
-        //   if (wrongCount == 0) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "tea") {
-        //   const keyCount: number = (message.match(/tea/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/team/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "urad") {
-        //   const keyCount: number = (message.match(/urad/g) || []).length;
-
-        //   if ((keyCount > (message.match(/urad daal/g) || []).length)) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "तूर") {
-        //   const keyCount: number = (message.match(/तूर/g) || []).length;
-
-        //   if ((keyCount > (message.match(/लातूर/g) || []).length)) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "coffeebeans") {
-        //   const keyCount: number = (message.match(/coffeebeans/g) || []).length;
-
-        //   if ((keyCount > (message.match(/rajma/g) || []).length)) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "toor") {
-        //   const keyCount: number = (message.match(/toor/g) || []).length;
-
-        //   if ((keyCount > (message.match(/toor daal/g) || []).length)) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "tur") {
-        //   const keyCount: number = (message.match(/tur/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/chitoor/g) || []).length
-        //   wrongCount += (message.match(/future/g) || []).length
-        //   wrongCount += (message.match(/Future/g) || []).length
-        //   wrongCount += (message.match(/saturday/g) || []).length
-        //   wrongCount += (message.match(/Saturday/g) || []).length
-        //   wrongCount += (message.match(/return/g) || []).length
-        //   wrongCount += (message.match(/Return/g) || []).length
-        //   wrongCount += (message.match(/guntur/g) || []).length
-        //   wrongCount += (message.match(/Guntur/g) || []).length
-        //   wrongCount += (message.match(/GUNTUR/g) || []).length
-        //   wrongCount += (message.match(/latur/g) || []).length
-        //   wrongCount += (message.match(/Latur/g) || []).length
-        //   wrongCount += (message.match(/LATUR/g) || []).length
-        //   wrongCount += (message.match(/asturi/g) || []).length
-        //   wrongCount += (message.match(/ASTURI/g) || []).length
-        //   wrongCount += (message.match(/oisture/g) || []).length
-        //   wrongCount += (message.match(/OISTURE/g) || []).length
-        //   wrongCount += (message.match(/atural/g) || []).length
-        //   wrongCount += (message.match(/ATURAL/g) || []).length
-        //   wrongCount += (message.match(/Proddatur/g) || []).length
-        //   wrongCount += (message.match(/proddatur/g) || []).length
-        //   wrongCount += (message.match(/manufactur/g) || []).length
-        //   wrongCount += (message.match(/Manufactur/g) || []).length
-        //   wrongCount += (message.match(/MANUFACTUR/g) || []).length
-
-        //   wrongCount += (message.match(/atur/g) || []).length
-        //   wrongCount += (message.match(/btur/g) || []).length
-        //   wrongCount += (message.match(/ctur/g) || []).length
-        //   wrongCount += (message.match(/dtur/g) || []).length
-        //   wrongCount += (message.match(/etur/g) || []).length
-        //   wrongCount += (message.match(/ftur/g) || []).length
-        //   wrongCount += (message.match(/gtur/g) || []).length
-        //   wrongCount += (message.match(/htur/g) || []).length
-        //   wrongCount += (message.match(/itur/g) || []).length
-        //   wrongCount += (message.match(/jtur/g) || []).length
-        //   wrongCount += (message.match(/ktur/g) || []).length
-        //   wrongCount += (message.match(/ltur/g) || []).length
-        //   wrongCount += (message.match(/mtur/g) || []).length
-        //   wrongCount += (message.match(/ntur/g) || []).length
-        //   wrongCount += (message.match(/otur/g) || []).length
-        //   wrongCount += (message.match(/ptur/g) || []).length
-        //   wrongCount += (message.match(/qtur/g) || []).length
-        //   wrongCount += (message.match(/rtur/g) || []).length
-        //   wrongCount += (message.match(/stur/g) || []).length
-        //   wrongCount += (message.match(/ttur/g) || []).length
-        //   wrongCount += (message.match(/utur/g) || []).length
-        //   wrongCount += (message.match(/vtur/g) || []).length
-        //   wrongCount += (message.match(/wtur/g) || []).length
-        //   wrongCount += (message.match(/xtur/g) || []).length
-        //   wrongCount += (message.match(/ytur/g) || []).length
-        //   wrongCount += (message.match(/ztur/g) || []).length
-
-        //   wrongCount += (message.match(/tura/g) || []).length
-        //   wrongCount += (message.match(/turb/g) || []).length
-        //   wrongCount += (message.match(/turc/g) || []).length
-
-        //   wrongCount += (message.match(/ture/g) || []).length
-        //   wrongCount += (message.match(/turf/g) || []).length
-        //   wrongCount += (message.match(/turg/g) || []).length
-        //   wrongCount += (message.match(/turh/g) || []).length
-        //   wrongCount += (message.match(/turi/g) || []).length
-        //   wrongCount += (message.match(/turj/g) || []).length
-        //   wrongCount += (message.match(/turk/g) || []).length
-        //   wrongCount += (message.match(/turl/g) || []).length
-        //   wrongCount += (message.match(/turm/g) || []).length
-        //   wrongCount += (message.match(/turn/g) || []).length
-        //   wrongCount += (message.match(/turo/g) || []).length
-        //   wrongCount += (message.match(/turp/g) || []).length
-        //   wrongCount += (message.match(/turq/g) || []).length
-        //   wrongCount += (message.match(/turr/g) || []).length
-        //   wrongCount += (message.match(/turs/g) || []).length
-        //   wrongCount += (message.match(/turt/g) || []).length
-        //   wrongCount += (message.match(/turu/g) || []).length
-        //   wrongCount += (message.match(/turv/g) || []).length
-        //   wrongCount += (message.match(/turw/g) || []).length
-        //   wrongCount += (message.match(/turx/g) || []).length
-        //   wrongCount += (message.match(/tury/g) || []).length
-        //   wrongCount += (message.match(/turz/g) || []).length
-
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "moth") {
-        //   const keyCount: number = (message.match(/moth/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/mother/g) || []).length
-        //   wrongCount += (message.match(/Mother/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "moong") {
-        //   const keyCount: number = (message.match(/moong/g) || []).length;
-        //   let wrongCount: number = 0;
-
-        //   wrongCount += (message.match(/मूंगफली/g) || []).length
-        //   wrongCount += (message.match(/मुंगफली/g) || []).length
-        //   wrongCount += (message.match(/moongfali/g) || []).length
-        //   wrongCount += (message.match(/moongfalli/g) || []).length
-        //   wrongCount += (message.match(/moong fali/g) || []).length
-        //   wrongCount += (message.match(/moong falli/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "mung") {
-        //   const keyCount: number = (message.match(/mung/g) || []).length;
-        //   let wrongCount: number = 0;
-        //   wrongCount += (message.match(/मूंग फली/g) || []).length
-        //   wrongCount += (message.match(/मूंगफली/g) || []).length
-        //   wrongCount += (message.match(/mungfali/g) || []).length
-        //   wrongCount += (message.match(/mungfalli/g) || []).length
-        //   wrongCount += (message.match(/mung fali/g) || []).length
-        //   wrongCount += (message.match(/mung falli/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "rice") {
-        //   const keyCount: number = (message.match(/rice/g) || []).length;
-        //   let wrongCount: number = 0;
-        //   wrongCount += (message.match(/price/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "मूंग") {
-        //   const keyCount: number = (message.match(/मूंग/g) || []).length;
-        //   let wrongCount: number = 0;
-        //   wrongCount += (message.match(/मूंग फली/g) || []).length
-        //   wrongCount += (message.match(/मूंगफली/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else if (checkWord == "chana") {
-        //   const keyCount: number = (message.match(/chana/g) || []).length;
-        //   let wrongCount: number = 0;
-        //   wrongCount += (message.match(/chanan/g) || []).length
-
-        //   if (keyCount > wrongCount) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // } else {
-        //   if (message.includes(checkWord)) {
-        //     keywordsList.push(uniqueWord)
-        //   }
-        // }
       }
     }
   }
@@ -1647,6 +1353,7 @@ export const messageIsRelevantForKeyword = (message: string, checkWord: string):
     wrongCount += (message.match(/rice guddy/g) || []).length // 02 march
     wrongCount += (message.match(/nanjangud/g) || []).length // 27 march
     wrongCount += (message.match(/miryalaguda/g) || []).length // 27 march
+    wrongCount += (message.match(/guddi/g) || []).length // 11 jun
 
     if (keyCount > wrongCount) {
       return true;
@@ -1659,6 +1366,10 @@ export const messageIsRelevantForKeyword = (message: string, checkWord: string):
     wrongCount += (message.match(/cotton/g) || []).length
     wrongCount += (message.match(/sugar mill/g) || []).length // 27 March
     wrongCount += (message.match(/nirani sugars/g) || []).length // 03 April
+    wrongCount += (message.match(/makka/g) || []).length // 12 may
+    wrongCount += (message.match(/maize/g) || []).length // 26 october
+    wrongCount += (message.match(/soybean/g) || []).length // 26 october
+    wrongCount += (message.match(/soya bean/g) || []).length // 26 october
 
     if (keyCount > wrongCount) {
       return true;
@@ -2024,6 +1735,14 @@ export const messageIsRelevantForKeyword = (message: string, checkWord: string):
     if (keyCount > wrongCount) {
       return true;
     }
+  } else if (checkWord == "groundnut" ) {
+    const keyCount: number = (message.match(/groundnut/g) || []).length;
+    let wrongCount: number = 0;
+    wrongCount += (message.match(/cake/g) || []).length // 04 may
+
+    if (keyCount > wrongCount) {
+      return true;
+    }
   } else if (checkWord == "saffloweroil" || checkWord == "safflower oil") {
     const keyCount: number = (message.match(/saffloweroil/g) || message.match(/safflower oil/g) || []).length;
     let wrongCount: number = 0;
@@ -2093,7 +1812,7 @@ export const messageIsRelevantForKeyword = (message: string, checkWord: string):
     wrongCount += (message.match(/krishna gold/g) || []).length // 28 march
     wrongCount += (message.match(/sortex gold/g) || []).length // 28 march
     wrongCount += (message.match(/vardhman gold/g) || []).length // 28 march
-    wrongCount += (message.match(/flour kismat gold/g) || []).length // 28 march
+    wrongCount += (message.match(/kismat gold/g) || []).length // 28 march
     wrongCount += (message.match(/daal gold/g) || []).length // 28 march
     wrongCount += (message.match(/matar white sona/g) || []).length // 28 march
     wrongCount += (message.match(/r s gold/g) || []).length // 28 march
@@ -2120,7 +1839,7 @@ export const messageIsRelevantForKeyword = (message: string, checkWord: string):
     wrongCount += (message.match(/rice old prince gold/g) || []).length // 28 march
     wrongCount += (message.match(/rice old sita gold/g) || []).length // 28 march
     wrongCount += (message.match(/golden roots/g) || []).length // 28 march
-    wrongCount += (message.match(/talai bold gold/g) || []).length // 28 march
+    wrongCount += (message.match(/bold gold/g) || []).length // 28 march
     wrongCount += (message.match(/tadka gold/g) || []).length // 28 march
     wrongCount += (message.match(/manpasand gold/g) || []).length // 28 march
     wrongCount += (message.match(/dhokla gold/g) || []).length // 28 march
@@ -2168,7 +1887,7 @@ export const messageIsRelevantForKeyword = (message: string, checkWord: string):
     wrongCount += (message.match(/new india gold/g) || []).length // 03 april
     wrongCount += (message.match(/vr gold/g) || []).length // 03 april
     wrongCount += (message.match(/minal gold/g) || []).length // 03 april
-    wrongCount += (message.match(/bold white gold/g) || []).length // 07 april
+    wrongCount += (message.match(/white gold/g) || []).length // 07 april
     wrongCount += (message.match(/shehnayi gold/g) || []).length // 07 april
     wrongCount += (message.match(/malwa gold/g) || []).length // 07 april
     wrongCount += (message.match(/kanha gold/g) || []).length // 09 april
@@ -2190,7 +1909,197 @@ export const messageIsRelevantForKeyword = (message: string, checkWord: string):
     wrongCount += (message.match(/n gold/g) || []).length // 02 may
     wrongCount += (message.match(/apna gold/g) || []).length // 02 may
     wrongCount += (message.match(/5 gold/g) || []).length // 02 may
-
+    wrongCount += (message.match(/nai gold/g) || []).length // 04 may
+    wrongCount += (message.match(/new gold/g) || []).length // 04 may
+    wrongCount += (message.match(/sharbati gold/g) || []).length // 09 may
+    wrongCount += (message.match(/urad gold/g) || []).length // 09 may
+    wrongCount += (message.match(/gold medal/g) || []).length // 09 may
+    wrongCount += (message.match(/gold nai/g) || []).length // 09 may
+    wrongCount += (message.match(/gold new/g) || []).length // 09 may
+    wrongCount += (message.match(/choti gold/g) || []).length // 21 may
+    wrongCount += (message.match(/bd gold/g) || []).length // 21 may
+    wrongCount += (message.match(/kiyana gold/g) || []).length // 21 may
+    wrongCount += (message.match(/hp gold/g) || []).length // 21 may
+    wrongCount += (message.match(/nila gold/g) || []).length // 21 may
+    wrongCount += (message.match(/samridhi gold/g) || []).length // 21 may
+    wrongCount += (message.match(/charbhuja gold/g) || []).length // 21 may
+    wrongCount += (message.match(/flour gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/gulabi gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/pink gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/mira gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/apsara gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/dal gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/daal gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/costal gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/oil gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/oil goldpuff/g) || []).length // 09 jun
+    wrongCount += (message.match(/bhavesh gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/village gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/villagegold/g) || []).length // 09 jun
+    wrongCount += (message.match(/meira gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/gold super/g) || []).length // 09 jun
+    wrongCount += (message.match(/desi gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/imp gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/imported gold/g) || []).length // 09 jun
+    wrongCount += (message.match(/desi, gold/g) || []).length // 11 jun
+    wrongCount += (message.match(/gold, dry/g) || []).length // 11 jun
+    wrongCount += (message.match(/gold fish/g) || []).length // 11 jun
+    wrongCount += (message.match(/prince gold/g) || []).length // 11 jun
+    wrongCount += (message.match(/gold mansuro/g) || []).length // 11 jun
+    wrongCount += (message.match(/sita gold/g) || []).length // 11 jun
+    wrongCount += (message.match(/goldpuff/g) || []).length // 12 jun
+    wrongCount += (message.match(/maize, sona/g) || []).length // 12 jun
+    wrongCount += (message.match(/moth gold/g) || []).length // 18 jun
+    wrongCount += (message.match(/moth, gold/g) || []).length // 18 jun
+    wrongCount += (message.match(/mohinee sona/g) || []).length // 18 jun
+    wrongCount += (message.match(/rs gold/g) || []).length // 18 jun
+    wrongCount += (message.match(/gold akra/g) || []).length // 18 jun
+    wrongCount += (message.match(/ltd, gold/g) || []).length // 18 jun
+    wrongCount += (message.match(/gold, naya/g) || []).length // 18 jun
+    wrongCount += (message.match(/agropure \s*\(\s*gold\s*\)/g) || []).length // 18 jun
+    wrongCount += (message.match(/ginni gold/g) || []).length // 18 jun
+    wrongCount += (message.match(/55gold/g) || []).length // 18 jun
+    wrongCount += (message.match(/55 gold/g) || []).length // 18 jun
+    wrongCount += (message.match(/gold star/g) || []).length // 18 jun
+    wrongCount += (message.match(/imp, gold/g) || []).length // 18 jun
+    wrongCount += (message.match(/sona gold/g) || []).length // 18 jun
+    wrongCount += (message.match(/royal gold/g) || []).length // 22 jun
+    wrongCount += (message.match(/royal gold/g) || []).length // 22 jun
+    wrongCount += (message.match(/agropure gold/g) || []).length // 22 jun
+    wrongCount += (message.match(/sumo gold/g) || []).length // 22 jun
+    wrongCount += (message.match(/gold bold/g) || []).length // 22 jun
+    wrongCount += (message.match(/masoor gold/g) || []).length // 22 jun
+    wrongCount += (message.match(/daal gold/g) || []).length // 22 jun
+    wrongCount += (message.match(/india gold/g) || []).length // 22 jun
+    wrongCount += (message.match(/meenal gold/g) || []).length // 01 jul
+    wrongCount += (message.match(/goldmedal/g) || []).length // 01 jul
+    wrongCount += (message.match(/mba gold/g) || []).length // 01 jul
+    wrongCount += (message.match(/gold medium/g) || []).length // 01 jul
+    wrongCount += (message.match(/gold, mm agro/g) || []).length // 01 jul
+    wrongCount += (message.match(/gold madhuvan/g) || []).length // 01 jul
+    wrongCount += (message.match(/madhuvan- gold/g) || []).length // 01 jul
+    wrongCount += (message.match(/samridhhi gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/ravi gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/10x gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/kiara gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/sambha gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/hari gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/murli gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/gold queen/g) || []).length // 16 jul
+    wrongCount += (message.match(/gold, mota fatka/g) || []).length // 16 jul
+    wrongCount += (message.match(/shiva gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/agrawal gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/masoor daal, gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/gold, malka/g) || []).length // 16 jul
+    wrongCount += (message.match(/gold malka/g) || []).length // 16 jul
+    wrongCount += (message.match(/mohinee gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/meenal gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/wheat gold/g) || []).length // 16 jul
+    wrongCount += (message.match(/surya gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/suryagold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold water/g) || []).length // 10 oct
+    wrongCount += (message.match(/gp gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/sumit gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/surya gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/available, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold, postman/g) || []).length // 10 oct
+    wrongCount += (message.match(/chilka gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/doc, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/rewa gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/daal, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/dal, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/tulsi gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/fatka, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/sg gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/active gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/b. gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gopigold/g) || []).length // 10 oct
+    wrongCount += (message.match(/kamalgold/g) || []).length // 10 oct
+    wrongCount += (message.match(/kailashgold/g) || []).length // 10 oct
+    wrongCount += (message.match(/naturagold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gopigold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold, factory/g) || []).length // 10 oct
+    wrongCount += (message.match(/choudhary gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold ginni/g) || []).length // 10 oct
+    wrongCount += (message.match(/malika gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/payment, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/malka gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/malka, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/marigold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold mota/g) || []).length // 10 oct
+    wrongCount += (message.match(/black gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/teliya gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/soya gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/chetak gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/ranjeet gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/malkha gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/\s*\(\s*gold\s*\), +gst/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold, +gst/g) || []).length // 10 oct
+    wrongCount += (message.match(/barley gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/annagiri gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold sortex/g) || []).length // 10 oct
+    wrongCount += (message.match(/\s*\(\s*gold\s*\), delivery/g) || []).length // 10 oct
+    wrongCount += (message.match(/sukhiparivar \s*\(\s*gold\s*\)/g) || []).length // 10 oct
+    wrongCount += (message.match(/pure gold (diamond)/g) || []).length // 10 oct
+    wrongCount += (message.match(/pure gold farm/g) || []).length // 10 oct
+    wrongCount += (message.match(/pure gold, malani/g) || []).length // 10 oct
+    wrongCount += (message.match(/shahiraa gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/shahira gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/sarju gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/honey gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/dawaat gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/dawat gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/46% \s*\(\s*gold\s*\)/g) || []).length // 10 oct
+    wrongCount += (message.match(/brazil gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/sharmili gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/chilka, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/karnataka, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold 6-5/g) || []).length // 10 oct
+    wrongCount += (message.match(/katariya gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gram gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/new sep gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold red/g) || []).length // 10 oct
+    wrongCount += (message.match(/russian \s*\(\s*gold\s*\)/g) || []).length // 10 oct
+    wrongCount += (message.match(/nayi gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/sukhi parivar \s*\(\s*gold\s*\)/g) || []).length // 10 oct
+    wrongCount += (message.match(/pure gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/agropure, \s*\(\s*gold\s*\)/g) || []).length // 18 jun
+    wrongCount += (message.match(/vanraj gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/gold premium/g) || []).length // 10 oct
+    wrongCount += (message.match(/flour, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/purani gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/sumit gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/mogar, gold/g) || []).length // 10 oct
+    wrongCount += (message.match(/old gold/g) || []).length // 12 oct
+    wrongCount += (message.match(/barley, gold/g) || []).length // 12 oct
+    wrongCount += (message.match(/ht gold/g) || []).length // 12 oct
+    wrongCount += (message.match(/shrimati gold/g) || []).length // 15 oct
+    wrongCount += (message.match(/gold dhanki/g) || []).length // 15 oct
+    wrongCount += (message.match(/maharaja gold/g) || []).length // 15 oct
+    wrongCount += (message.match(/gold, choudhary/g) || []).length // 15 oct
+    wrongCount += (message.match(/select gold/g) || []).length // 15 oct
+    wrongCount += (message.match(/gold old/g) || []).length // 15 oct
+    wrongCount += (message.match(/nayi sep gold/g) || []).length // 15 oct
+    wrongCount += (message.match(/suncity gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/aravalli gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/sm gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/gold steam/g) || []).length // 06 nov
+    wrongCount += (message.match(/futana gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/futana, gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/ram gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/babuji gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/babuji, gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/nai sep gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/jowar gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/chetak gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/gold grain/g) || []).length // 06 nov
+    wrongCount += (message.match(/dhowa gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/shreya gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/bhagwati gold/g) || []).length // 06 nov
+    wrongCount += (message.match(/gold g-5/g) || []).length // 06 nov
+    wrongCount += (message.match(/vanrajgoldbesan/g) || []).length // 06 nov
+    wrongCount += (message.match(/gold, mogar/g) || []).length // 06 nov
+    wrongCount += (message.match(/gold coin/g) || []).length // 06 nov
     if (keyCount > wrongCount) {
       return true;
     }
@@ -2217,6 +2126,36 @@ export const messageIsRelevantForKeyword = (message: string, checkWord: string):
     wrongCount += (message.match(/bold silver/g) || []).length // 24 april
     wrongCount += (message.match(/disco silver/g) || []).length // 24 april
     wrongCount += (message.match(/new silver/g) || []).length // 02 may
+    wrongCount += (message.match(/south silver/g) || []).length // 09 jun
+    wrongCount += (message.match(/south silver/g) || []).length // 09 jun
+    wrongCount += (message.match(/axa silver/g) || []).length // 23 jun
+    wrongCount += (message.match(/agrawal silver/g) || []).length // 23 jun
+    wrongCount += (message.match(/palak silver/g) || []).length // 23 jun
+    wrongCount += (message.match(/choti\s*\(\s*silver\s*\)/g) || []).length // 23 jun
+    wrongCount += (message.match(/silver\s*\(\s*new\s*\)/g) || []).length // 23 jun
+    wrongCount += (message.match(/ruru silver/g) || []).length // 23 jun
+    wrongCount += (message.match(/choti silver/g) || []).length // 23 jun
+    wrongCount += (message.match(/daal silver/g) || []).length // 23 jun
+    wrongCount += (message.match(/fivestar\s*\/\s*silver/g) || []).length // 23 jun
+    wrongCount += (message.match(/sunrise\s*\/\s*silver/g) || []).length // 23 jun
+    wrongCount += (message.match(/wheat silver/g) || []).length // 01 jul
+    wrongCount += (message.match(/mogar, silver/g) || []).length // 01 jul
+    wrongCount += (message.match(/gota silver/g) || []).length // 01 jul
+    wrongCount += (message.match(/silver navkar/g) || []).length // 01 jul
+    wrongCount += (message.match(/agrawal silver/g) || []).length // 01 jul
+    wrongCount += (message.match(/h d silver/g) || []).length // 10 oct
+    wrongCount += (message.match(/choti, silver/g) || []).length // 10 oct
+    wrongCount += (message.match(/star silver/g) || []).length // 10 oct
+    wrongCount += (message.match(/flour, silver/g) || []).length // 10 oct
+    wrongCount += (message.match(/jowar, silver/g) || []).length // 10 oct
+    wrongCount += (message.match(/kabuli, silver/g) || []).length // 06 nov
+    wrongCount += (message.match(/flour silver/g) || []).length // 06 nov
+    wrongCount += (message.match(/jowar silver/g) || []).length // 06 nov
+    wrongCount += (message.match(/kabuli silver/g) || []).length // 06 nov
+    wrongCount += (message.match(/ranjeet silver/g) || []).length // 06 nov
+    wrongCount += (message.match(/talai silver/g) || []).length // 06 nov
+    wrongCount += (message.match(/silver leaves/g) || []).length // 06 nov
+    wrongCount += (message.match(/silver leaves/g) || []).length // 06 nov
 
     if (keyCount > wrongCount) {
       return true;
@@ -2248,6 +2187,8 @@ export const messageIsRelevantForKeyword = (message: string, checkWord: string):
     
     let wrongCount: number = 0;
     wrongCount += (message.match(/cotton wash oil/g) || []).length // 01 april
+    wrongCount += (message.match(/cotton seed/g) || []).length // 11 jun
+    wrongCount += (message.match(/cottonseed/g) || []).length // 11 jun
 
     if (keyCount > wrongCount) {
       return true;

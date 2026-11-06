@@ -74,6 +74,7 @@ export const p_toPostHistory_export = functions.region('asia-south1').runWith({ 
         let postCreatedAt: string = data.postCreatedAt == undefined ? '' : data.postCreatedAt.toString();
         let type: string = data.rateOnly == true ? 'rateOnly' : data.news == true ? 'news' : data.buySell == true ? 'buySell' : '';
         let unit: string = data.unit == undefined ? '' : data.unit;
+        let aiVariety: boolean = data.aiVariety == undefined ? '' : data.aiVariety;
 
         // variety = variety.replace('^', ' ')
         // variety = variety.trim()
@@ -93,11 +94,28 @@ export const p_toPostHistory_export = functions.region('asia-south1').runWith({ 
             postText = ''
         }
 
-        let concatString = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}///${city}///${postCreatedAt}///${type}///////////////${unit}///`;
+        const companyId = context.params.cId;
+        const postId = context.params.postId;
+
+        const plusMinusEntry = [
+          companyId,
+          variety ?? "",
+          rateFrom ?? "",
+          rateTo ?? "",
+          increase ?? "",
+          postId ?? "",
+          name ?? "",
+          city ?? "",
+          postText,
+          data.postCreatedAt ?? "",
+        ].join("//");
+
+        let concatString = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}///${city}///${postCreatedAt}///${type}///////////////${unit}///${aiVariety}///`;
 
         const db: FirebaseFirestore.Firestore = admin.firestore();
         const postHistoryCollec = db.collection('postsHistory')
         let eodMil = eod(Date.now())
+        const previousDayEodMil = eod(Date.now() - 24 * 60 * 60 * 1000)
         try {
             if (data.postCreatedAt != undefined && data.postCreatedAt != null) {
                 eodMil = eod(data.postCreatedAt)
@@ -105,6 +123,62 @@ export const p_toPostHistory_export = functions.region('asia-south1').runWith({ 
         } catch (e) {
             if (e instanceof Error)
                 await logError(`p_toPostHistory///8///${e.toString()}`)
+        }
+
+        // add to postHistory eodA, eodB, eodC and eodD document
+        let companyDoc: FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData> | undefined = undefined
+        try {
+            companyDoc = await admin
+                .firestore()
+                .collection(companiesCollectionStringV2)
+                .doc(companyId)
+                .get();
+        } catch (e) {
+            console.log(`company doc not found for ${companyId}, ${e}`)
+        }
+
+        if (companyDoc != undefined && companyDoc.exists) {
+            const companyPhone = companyDoc.get('phoneOne');
+
+            let suffix = 'D'; // Default
+
+            if (companyPhone != undefined && companyPhone != null && companyPhone.length > 0) {
+                const lastDigit = parseInt(companyPhone[companyPhone.length - 1], 10);
+
+
+                if (!isNaN(lastDigit)) {
+                    if (lastDigit >= 0 && lastDigit <= 2) {
+                        suffix = 'A';
+                    } else if (lastDigit >= 3 && lastDigit <= 5) {
+                        suffix = 'B';
+                    } else if (lastDigit >= 6 && lastDigit <= 7) {
+                        suffix = 'C';
+                    } else {
+                        suffix = 'D';
+                    }
+                }
+            }
+
+            // console.log(`add history for ${companyId} with suffix ${suffix} and data is ${plusMinusEntry}`);
+            
+            try {
+                const docRef = postHistoryCollec.doc(`${previousDayEodMil}${suffix}`);
+                const docSnap = await docRef.get();
+                console.log(`docSnap.exists for ${companyId} with suffix ${suffix} and eodMil ${previousDayEodMil}: ${docSnap.exists}`);
+
+                if (docSnap.exists) {
+                    await docRef.update({
+                        rates: admin.firestore.FieldValue.arrayUnion(plusMinusEntry),
+                    });
+                } else {
+                    await docRef.set({
+                        rates: [plusMinusEntry],
+                    });
+                }
+
+            } catch (e) {
+                console.log(`Error updating postHistory for ${companyId} with suffix ${suffix} and eodMil ${previousDayEodMil}: ${e}`);
+            }
         }
 
         // const keywordsToCheck: string[] = [
@@ -184,6 +258,7 @@ export const p_toPostHistoryDelete_export = functions.region('asia-south1').runW
         let postCreatedAt: string = data.postCreatedAt == undefined ? '' : data.postCreatedAt.toString();
         let type: string = data.rateOnly == true ? 'rateOnly' : data.news == true ? 'news' : data.buySell == true ? 'buySell' : '';
         let unit: string = data.unit == undefined ? '' : data.unit;
+        let aiVariety: boolean = data.aiVariety == undefined ? '' : data.aiVariety;
 
         // variety = variety.replace('^', ' ')
         // variety = variety.trim()
@@ -197,15 +272,17 @@ export const p_toPostHistoryDelete_export = functions.region('asia-south1').runW
             postText = ''
         }
 
-        let concatString = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}///${city}///${postCreatedAt}///${type}`;
-        let concatStringWithoutCity = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}//////${postCreatedAt}///${type}`;
+        let concatString = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}///${city}///${postCreatedAt}///${type}//////////////////${aiVariety}`;
+        let concatStringWithoutCity = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}//////${postCreatedAt}///${type}//////////////////${aiVariety}`;
 
-        let concatStringWithUnit = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}///${city}///${postCreatedAt}///${type}///////////////${unit}///`;
-        let concatStringWithoutCityWithUnit = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}//////${postCreatedAt}///${type}///////////////${unit}///`;
+        let concatStringWithUnit = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}///${city}///${postCreatedAt}///${type}///////////////${unit}///${aiVariety}///`;
+        let concatStringWithoutCityWithUnit = `${id}///${name}///${postText}///${rateFrom}///${rateTo}///${increase}///${stateCode}///${variety}//////${postCreatedAt}///${type}///////////////${unit}///${aiVariety}///`;
 
         const db: FirebaseFirestore.Firestore = admin.firestore();
         const postHistoryCollec = db.collection('postsHistory')
         const eodMil = eod(postCreatedAtOriginalNumber)
+        const nextDayEodMil = eod(postCreatedAtOriginalNumber + 24 * 60 * 60 * 1000)
+        const postCreatedAtMil = Number(postCreatedAt)
 
         // await logError(`p_toPostHistory///4///will try to delete from ${eodMil}_...: ${concatString}`)
 
@@ -234,10 +311,80 @@ export const p_toPostHistoryDelete_export = functions.region('asia-south1').runW
                     await postHistoryCollec.doc(`${eodMil}_${k}`).update({
                         rates: admin.firestore.FieldValue.arrayRemove(concatString, concatStringWithoutCity, concatStringWithUnit, concatStringWithoutCityWithUnit)
                     });
+                    
+                    try {
+                        await postHistoryCollec.doc(`${eodMil}A`).update({
+                            rates: admin.firestore.FieldValue.arrayRemove(concatString, concatStringWithoutCity, concatStringWithUnit, concatStringWithoutCityWithUnit)
+                        });
+                        
+                        await postHistoryCollec.doc(`${eodMil}B`).update({
+                            rates: admin.firestore.FieldValue.arrayRemove(concatString, concatStringWithoutCity, concatStringWithUnit, concatStringWithoutCityWithUnit)
+                        });
+                        
+                        await postHistoryCollec.doc(`${eodMil}C`).update({
+                            rates: admin.firestore.FieldValue.arrayRemove(concatString, concatStringWithoutCity, concatStringWithUnit, concatStringWithoutCityWithUnit)
+                        });
+                        
+                        await postHistoryCollec.doc(`${eodMil}D`).update({
+                            rates: admin.firestore.FieldValue.arrayRemove(concatString, concatStringWithoutCity, concatStringWithUnit, concatStringWithoutCityWithUnit)
+                        });
+                        
+                        await postHistoryCollec.doc(`${nextDayEodMil}A`).update({
+                            rates: admin.firestore.FieldValue.arrayRemove(concatString, concatStringWithoutCity, concatStringWithUnit, concatStringWithoutCityWithUnit)
+                        });
+                        
+                        await postHistoryCollec.doc(`${nextDayEodMil}B`).update({
+                            rates: admin.firestore.FieldValue.arrayRemove(concatString, concatStringWithoutCity, concatStringWithUnit, concatStringWithoutCityWithUnit)
+                        });
+                        
+                        await postHistoryCollec.doc(`${nextDayEodMil}C`).update({
+                            rates: admin.firestore.FieldValue.arrayRemove(concatString, concatStringWithoutCity, concatStringWithUnit, concatStringWithoutCityWithUnit)
+                        });
+                        
+                        await postHistoryCollec.doc(`${nextDayEodMil}D`).update({
+                            rates: admin.firestore.FieldValue.arrayRemove(concatString, concatStringWithoutCity, concatStringWithUnit, concatStringWithoutCityWithUnit)
+                        });
+                    } catch (e) {
+                        if (e instanceof Error)
+                            await logError(`p_toPostHistoryDelete///3c///${k} ${e.toString()}`)
+                    }
                     writesCounter++
                 } catch (e) {
                     if (e instanceof Error)
                         await logError(`p_toPostHistoryDelete///3///eod: ${eod} postCreatedAt: ${postCreatedAtOriginalNumber} id:${id} name:${name} variety:${variety} postText:${postText} ${e.toString()}`)
+                }
+
+                try {
+                    const chartDocRef = postHistoryCollec.doc(`00_${k}_chartData`)
+                    const chartDoc = await chartDocRef.get()
+                    readsCounter++
+
+                    if (chartDoc.exists) {
+                        const chartData = chartDoc.data()?.chartData
+                        if (chartData != null && chartData != undefined && !isNaN(postCreatedAtMil)) {
+                            const chartDataObj: Map<string, any> = new Map(Object.entries(chartData));
+                            const chartDataKeys = Array.from(chartDataObj.keys())
+
+                            for (const concat of chartDataKeys) {
+                                try {
+                                    const varietyMap = chartDataObj.get(concat)
+                                    const varietyMapObj: Map<string, any> = new Map(Object.entries(varietyMap ?? {}));
+                                    const companyId = varietyMapObj.get('companyId') ?? ''
+                                    if (companyId == id) {
+                                        const pathStr = `chartData.${concat}.intradayRates.${postCreatedAtMil}`
+                                        await chartDocRef.update({ [pathStr]: admin.firestore.FieldValue.delete() })
+                                        writesCounter++
+                                    }
+                                } catch (e) {
+                                    if (e instanceof Error)
+                                        await logError(`p_toPostHistoryDelete///3b///${k} ${e.toString()}`)
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {
+                    if (e instanceof Error)
+                        await logError(`p_toPostHistoryDelete///3a///${k} ${e.toString()}`)
                 }
             }
         }
